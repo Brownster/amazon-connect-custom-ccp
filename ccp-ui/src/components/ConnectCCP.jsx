@@ -39,7 +39,6 @@ const ConnectCCP = () => {
     <div
       ref={ref}
       style={{ width: "100%", height: "100%", minHeight: 480, minWidth: 400 }}
-      // style={{ minWidth: 400, minHeight: 480 }}
     />
   );
 };

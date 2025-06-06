@@ -3,7 +3,7 @@
 
 ## Introduction
 
-`amazon-connect-custom-ccp` provides a way to build a custom ccp dashboard for your Amazon Connect contact center. These instructions focus on how to use the software to create a ccp dashboard. This dashboard will display: 
+`amazon-connect-custom-ccp` provides a way to build a custom ccp dashboard for your Amazon Connect contact center. The UI now uses Material-UI for a modern look and feel. These instructions focus on how to use the software to create a ccp dashboard. This dashboard will display:
 
 - A banner to indicate if a call is priority. This is set by a field in the API response when an agent connects to a call.
 - A section with the queue name, broker code and account name. This can be changed to suit the needs of your project
@@ -83,6 +83,10 @@ $ npm install
 $ npm run build
 $ npm start
 ```
+
+### Admin Settings
+
+An admin interface is available at `/admin` for configuring the primary theme color, logo path and which modules are displayed on the dashboard. Settings are stored in `localStorage` and applied on next page load.
 
 ## Security
 

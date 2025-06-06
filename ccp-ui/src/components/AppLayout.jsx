@@ -21,14 +21,10 @@ import AppLayoutBase from "aws-northstar/layouts/AppLayout";
 import HeaderBase from "aws-northstar/components/Header";
 
 const AppLayout = ({ children }) => {
-  const Header = useMemo(
-    () => (
-      <HeaderBase
-        logoPath={process.env.PUBLIC_URL + '/<<logo_name>>.png'}
-      />
-    ),
-    []
-  );
+  const Header = useMemo(() => {
+    const logo = localStorage.getItem('logo') || '/logo192.png';
+    return <HeaderBase logoPath={logo} />;
+  }, []);
 
   return (
     <AppLayoutBase

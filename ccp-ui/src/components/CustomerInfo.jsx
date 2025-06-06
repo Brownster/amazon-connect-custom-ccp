@@ -3,11 +3,7 @@
 
 import "amazon-connect-streams";
 import React, {useCallback, useEffect, useState} from "react";
-import Text from "aws-northstar/components/Text";
-import Box from "aws-northstar/layouts/Box";
-import Container from "aws-northstar/layouts/Container";
-import ColumnLayout, { Column } from 'aws-northstar/layouts/ColumnLayout';
-import Stack from 'aws-northstar/layouts/Stack';
+import { Box, Container, Stack, Typography, Grid } from "@mui/material";
 import { useConnected, useDestroy } from "../hooks";
 import { genLogger, valueToOption } from "../lib";
 import ContactDispositionSection from "./ContactDispositionSection";
@@ -125,50 +121,53 @@ const CustomerInfo = () => {
   return (
     <div>
       {
-        data.priority === "true" ? (<Box
-          bgcolor="#36741B"
-          color="white"
-          fontSize="28px"
-          fontWeight="bold"
-          textAlign="center"
-          marginBottom="5px"
-          height="60px"
-          padding="20px"
+        data.priority === "true" ? (
+        <Box
+          sx={{
+            bgcolor: "#36741B",
+            color: "white",
+            fontSize: "28px",
+            fontWeight: "bold",
+            textAlign: "center",
+            mb: "5px",
+            height: "60px",
+            p: "20px",
+          }}
         >
           Priority
         </Box>) : null
       }
       <div>
-        <Box bgcolor="#414141" color="white" fontSize="18px" textAlign="center" height="35px" padding="8px" m={0}>
+        <Box sx={{ bgcolor: "#414141", color: "white", fontSize: "18px", textAlign: "center", height: "35px", p: "8px", m: 0 }}>
           Contact Attributes
         </Box>
         <Container>
-          <ColumnLayout>
-            <Column key="column1">
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
               <Stack>
                 {
                   Object.keys(data).map((key, index) => {
                     if (key !== "intent" && key !== "priority") {
-                      return  <Text color="primary" key={index}>{keyNameMappings[key]}</Text>;
+                      return  <Typography color="primary" key={index}>{keyNameMappings[key]}</Typography>;
                     }
                     return null;
                   })
                 }
               </Stack>
-            </Column>
-            <Column key="column2">
+            </Grid>
+            <Grid item xs={6}>
               <Stack>
                 {
                   Object.keys(data).map((key, index) => {
                     if (key !== "intent" && key !== "priority") {
-                      return <Text color="primary" key={index}>{data[key] || "-"}</Text>;
+                      return <Typography color="primary" key={index}>{data[key] || "-"}</Typography>;
                     }
                     return null;
                   })
                 }
               </Stack>
-            </Column>
-          </ColumnLayout>
+            </Grid>
+          </Grid>
         </Container>
         <ContactDispositionSection
           initialIntent={initialIntent?.value}
