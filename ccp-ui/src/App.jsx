@@ -17,10 +17,13 @@
  */
 
 import React, { useCallback, useMemo } from "react";
-import NorthStarThemeProvider from "aws-northstar/components/NorthStarThemeProvider";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { getTheme } from "./theme";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./components/Dashboard";
+import Admin from "./components/Admin";
 
 const withLayout = (Component) => (props) => {
   const Comp = useCallback(() => <Component {...props} />, [props]);
@@ -33,15 +36,20 @@ const withLayout = (Component) => (props) => {
 
 const App = () => {
   const Dash = useMemo(() => withLayout(Dashboard), []);
+  const AdminPage = useMemo(() => withLayout(Admin), []);
+
+  const theme = useMemo(() => getTheme(), []);
 
   return (
-    <NorthStarThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <Switch>
           <Route exact path="/" component={Dash} />
+          <Route exact path="/admin" component={AdminPage} />
         </Switch>
       </Router>
-    </NorthStarThemeProvider>
+    </ThemeProvider>
   );
 };
 

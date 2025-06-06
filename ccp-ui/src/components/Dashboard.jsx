@@ -18,7 +18,7 @@
 
 import React, { useCallback } from "react";
 import "@awsui/global-styles/index.css"
-import Grid from "aws-northstar/layouts/Grid";
+import Grid from "@mui/material/Grid";
 import ConnectCCP from "./ConnectCCP";
 import CustomerInfo from "./CustomerInfo";
 
@@ -27,15 +27,20 @@ const Dashboard = () => {
   // Avoid re-rendering ConnectCCP
   const CCP = useCallback(() => <ConnectCCP />, []);
 
+  const modules = JSON.parse(localStorage.getItem('modules') || '{}');
   return (
     <>
       <Grid container spacing={3} style={{ height: "90vh" }}>
-        <Grid item xs={4}>
-          <CCP />
-        </Grid>
-        <Grid item xs={8}>
-          <CustomerInfo />
-        </Grid>
+        {modules.ccp !== false && (
+          <Grid item xs={4}>
+            <CCP />
+          </Grid>
+        )}
+        {modules.workspace !== false && (
+          <Grid item xs={8}>
+            <CustomerInfo />
+          </Grid>
+        )}
       </Grid>
     </>
   );
